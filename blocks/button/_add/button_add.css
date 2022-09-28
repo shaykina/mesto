@@ -1,0 +1,13 @@
+.button_add {
+  width: 150px;
+  height: 50px;
+  background-image: url(../../../images/add-button.svg);
+  background-size: 22px;
+  border: 2px solid #FFFFFF;
+}
+
+@media screen and (max-width: 425px) {
+  .button_add {
+    width: 100%;
+  }
+}
