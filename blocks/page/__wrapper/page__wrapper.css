@@ -1,0 +1,10 @@
+.page__wrapper {
+  max-width: 1280px;
+  padding: 0 200px;
+}
+
+@media screen and (max-width: 425px) {
+  .page__wrapper {
+    padding: 0;
+  }
+}
