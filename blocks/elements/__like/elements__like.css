@@ -1,0 +1,14 @@
+.elements__like {
+  width: 22px;
+  height: 19px;
+  transition: .4s;
+}
+
+.elements__like:hover {
+  opacity: .6;
+  cursor: pointer;
+}
+
+.elements__like:active {
+  background-color: #000000;
+}
