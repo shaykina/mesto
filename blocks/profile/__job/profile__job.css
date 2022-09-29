@@ -9,13 +9,17 @@
 
 @media screen and (max-width: 1123px) {
   .profile__job {
-    margin-bottom: 36px;
+    margin-bottom: 33px;
+    text-align: center;
+    width: 100%;
   }
 }
 
 @media screen and (max-width: 900px) {
   .profile__job {
     text-align: center;
+    font-size: 14px;
+    line-height: 17px;
   }
 }
 

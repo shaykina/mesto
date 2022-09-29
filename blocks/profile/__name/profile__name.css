@@ -1,17 +1,19 @@
 .profile__name {
-  margin: 0 18px 0 0;
+  margin: 0;
   font-style: normal;
   font-weight: 500;
   font-size: 42px;
   line-height: 114%;
   color: #FFFFFF;
-  display: inline;
+  max-height: 39px;
 }
 
 @media screen and (max-width: 900px) {
   .profile__name {
-    margin-right: 10px;
     text-align: center;
+    max-height: 26px;
+    font-size: 27px;
+    line-height: 33px;
   }
 }
 
