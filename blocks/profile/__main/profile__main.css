@@ -4,8 +4,10 @@
   align-items: center;
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 500px) {
   .profile__main {
-    flex-direction: column;
+    flex-wrap: wrap;
+    max-width: 300px;
+    justify-content: center;
   }
 }

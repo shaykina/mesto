@@ -17,16 +17,11 @@
 @media screen and (max-width: 900px) {
   .button_edit {
     margin-top: 0;
-    position: absolute;
-    right: 20%;
-    top: 300px;
   }
 }
 
 @media screen and (max-width: 425px) {
   .button_edit {
-    right: 38px;
-    top: 280px;
     width: 18px;
     height: 18px;
   }

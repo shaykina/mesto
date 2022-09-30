@@ -1,8 +1,7 @@
 .profile__info {
   display: flex;
-  max-width: 294px;
-  flex-wrap: wrap;
-  align-items: flex-end;
+  max-width: 530px;
+  flex-direction: column;
   margin-right: 18px;
 }
 
@@ -12,8 +11,14 @@
   }
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 500px) {
   .profile__info {
-    margin-right: 0;
+    margin-right: 10px;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .profile__info {
+    max-width: 280px;
   }
 }
