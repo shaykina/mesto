@@ -2,12 +2,19 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-right: auto;
+}
+
+@media screen and (max-width: 1123px) {
+  .profile__main {
+    margin-right: 0;
+  }
 }
 
 @media screen and (max-width: 500px) {
   .profile__main {
-    flex-wrap: wrap;
-    max-width: 300px;
     justify-content: center;
+    margin-left: 23px;
+    max-width: 282px;
   }
 }

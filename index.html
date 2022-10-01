@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="pages/index.css">
-  <title>Mesto</title>
+  <title>Место</title>
 </head>
 
 <body class="page">
@@ -16,57 +16,57 @@
     </header>
     <main class="content">
       <section class="profile">
+        <img class="profile__avatar" src="images/Avatar.jpg" alt="фото Кусто">
         <div class="profile__main">
-          <img class="profile__avatar" src="images/Avatar.jpg" alt="фото Кусто">
           <div class="profile__info">
             <h1 class="profile__name">Жак-Ив Кусто</h1>
             <p class="profile__job">Исследователь океана</p>
           </div>
-          <button class="button button_edit"></button>
+          <button class="button profile__edit-button" type="button" aria-label="кнопка редактирования"></button>
         </div>
-        <button class="button button_add"></button>
+        <button class="button profile__add-button" type="button" aria-label="кнопка добавления"></button>
       </section>
-      <section class="elements" aria-label="elements">
-        <article class="elements__card">
-          <img class="elements__image" src="images/italy-first.jpg" alt="постройки в горах">
-          <div class="elements__caption">
-            <h2 class="elements__title">Карачаевск</h2>
-            <img class="elements__like" src="images/like.svg" alt="сердечко">
+      <section class="elements" aria-label="карточки">
+        <article class="card">
+          <img class="card__image" src="images/italy-first.jpg" alt="постройки в горах">
+          <div class="card__caption">
+            <h2 class="card__title">Карачаевск</h2>
+            <button class="button card__like" type="button" aria-label="кнопка лайк"></button>
           </div>
         </article>
-        <article class="elements__card">
-          <img class="elements__image" src="images/italy-second.jpg" alt="Эльбрус на рассвете">
-          <div class="elements__caption">
-            <h2 class="elements__title">Гора Эльбрус</h2>
-            <img class="elements__like" src="images/like.svg" alt="сердечко">
+        <article class="card">
+          <img class="card__image" src="images/italy-second.jpg" alt="Эльбрус на рассвете">
+          <div class="card__caption">
+            <h2 class="card__title">Гора Эльбрус</h2>
+            <button class="button card__like" type="button" aria-label="кнопка лайк"></button>
           </div>
         </article>
-        <article class="elements__card">
-          <img class="elements__image" src="images/italy-third.jpg" alt="лес и горы">
-          <div class="elements__caption">
-            <h2 class="elements__title">Домбай</h2>
-            <img class="elements__like" src="images/like.svg" alt="сердечко">
+        <article class="card">
+          <img class="card__image" src="images/italy-third.jpg" alt="лес и горы">
+          <div class="card__caption">
+            <h2 class="card__title">Домбай</h2>
+            <button class="button card__like" type="button" aria-label="кнопка лайк"></button>
           </div>
         </article>
-        <article class="elements__card">
-          <img class="elements__image" src="images/italy-fourth.jpg" alt="Эльбрус на рассвете">
-          <div class="elements__caption">
-            <h2 class="elements__title">Гора Эльбрус</h2>
-            <img class="elements__like" src="images/like.svg" alt="сердечко">
+        <article class="card">
+          <img class="card__image" src="images/italy-fourth.jpg" alt="Эльбрус на рассвете">
+          <div class="card__caption">
+            <h2 class="card__title">Гора Эльбрус</h2>
+            <button class="button card__like" type="button" aria-label="кнопка лайк"></button>
           </div>
         </article>
-        <article class="elements__card">
-          <img class="elements__image" src="images/italy-fifth.jpg" alt="лес и горы">
-          <div class="elements__caption">
-            <h2 class="elements__title">Домбай</h2>
-            <img class="elements__like" src="images/like.svg" alt="сердечко">
+        <article class="card">
+          <img class="card__image" src="images/italy-fifth.jpg" alt="лес и горы">
+          <div class="card__caption">
+            <h2 class="card__title">Домбай</h2>
+            <button class="button card__like" type="button" aria-label="кнопка лайк"></button>
           </div>
         </article>
-        <article class="elements__card">
-          <img class="elements__image" src="images/italy-sixth.jpg" alt="постройки в горах">
-          <div class="elements__caption">
-            <h2 class="elements__title">Карачаево-Черкессия</h2>
-            <img class="elements__like" src="images/like.svg" alt="сердечко">
+        <article class="card">
+          <img class="card__image" src="images/italy-sixth.jpg" alt="постройки в горах">
+          <div class="card__caption">
+            <h2 class="card__title">Карачаево-Черкессия</h2>
+            <button class="button card__like" type="button" aria-label="кнопка лайк"></button>
           </div>
         </article>
       </section>
@@ -74,17 +74,19 @@
     <footer class="footer">
       <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
     </footer>
-    <section class="popup">
-      <form class="popup__container">
-        <button class="popup__close"></button>
+    <div class="popup">
+      <div class="popup__container">
+        <button class="button popup__close" type="button" aria-label="кнопка закрытия попапа"></button>
         <h2 class="popup__heading">Редактировать профиль</h2>
-        <fieldset class="popup__form">
-          <input class="popup__input" type="text" id="name" name="name" placeholder="Имя">
-          <input class="popup__input" type="text" id="job" name="job" placeholder="О себе">
-        </fieldset>
-        <button class="popup__submit">Сохранить</button>
-      </form>
-    </section>
+        <form class="popup__edit-form" name="edit-form">
+          <fieldset class="popup__form">
+            <input class="popup__input popup__input_name" type="text" name="name" placeholder="Имя">
+            <input class="popup__input popup__input_job" type="text" name="job" placeholder="О себе">
+          </fieldset>
+          <button class="popup__submit" type="submit">Сохранить</button>
+        </form>
+      </div>
+    </div>
   </div>
   <script src="scripts/index.js"></script>
 </body>

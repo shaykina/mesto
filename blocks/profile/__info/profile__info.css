@@ -1,24 +1,14 @@
 .profile__info {
   display: flex;
-  max-width: 530px;
+  max-width: 336px;
   flex-direction: column;
   margin-right: 18px;
-}
-
-@media screen and (max-width: 1123px) {
-  .profile__info {
-    flex-direction: column;
-  }
 }
 
 @media screen and (max-width: 500px) {
   .profile__info {
     margin-right: 10px;
-  }
-}
-
-@media screen and (max-width: 425px) {
-  .profile__info {
     max-width: 280px;
   }
 }
+

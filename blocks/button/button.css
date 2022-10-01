@@ -2,12 +2,8 @@
   box-sizing: border-box;
   background-repeat: no-repeat;
   background-position: center;
-  background-color: #000000;
+  background-color: transparent;
   padding: 0;
   transition: .4s;
-}
-
-.button:hover {
-  opacity: .6;
   cursor: pointer;
 }
