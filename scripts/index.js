@@ -1,19 +1,20 @@
 const popupEdit = document.querySelector('.popup_edit');
 const popupAdd = document.querySelector('.popup_add');
 const popupPicture = document.querySelector('.popup_picture');
-const closeEditBtn = document.querySelector('.popup__close');
-const closeAddBtn = popupAdd.querySelector('.popup__close');
-const closePictureBtn = popupPicture.querySelector('.popup__close');
-const makeBtn = popupAdd.querySelector('.popup__submit_make');
-const edit = document.querySelector('.profile__edit-button');
-const add = document.querySelector('.profile__add-button');
+const editPopupBtn = document.querySelector('.profile__edit-button');
+const addPopupBtn = document.querySelector('.profile__add-button');
 const profileName = document.querySelector('.profile__name');
 const profileJob = document.querySelector('.profile__job')
-const formElement = document.querySelector('.popup__edit-form');
-const addFormElement = document.querySelector('.popup__add-form');
-const nameInput = formElement.querySelector('.popup__input_type_name');
-const jobInput = formElement.querySelector('.popup__input_type_job');
+const profileForm = document.forms["edit-form"];
+const cardForm = document.forms["add-form"];
+const nameInput = profileForm.querySelector('.popup__input_type_name');
+const jobInput = profileForm.querySelector('.popup__input_type_job');
 const cardContainer = document.querySelector('.elements');
+const cardFidcaption = document.querySelector('.popup__fidcaption');
+const cardBigImage = document.querySelector('.popup__image');
+const placeName = document.querySelector('.popup__input_type_place-name');
+const placeLink = document.querySelector('.popup__input_type_link');
+
 const initialCards = [
   {
     name: 'Архыз',
@@ -41,16 +42,6 @@ const initialCards = [
   }
 ];
 
-function deleteCard() {
-  const deleteButtons = document.querySelectorAll('.card__trash');
-  deleteButtons.forEach(function (item) {
-    item.addEventListener('click', function () {
-      const card = item.closest('.card');
-      card.remove();
-    });
-  })
-}
-
 function showPopUp(popup) {
   popup.classList.add('popup_opened');
 }
@@ -60,30 +51,38 @@ function hidePopUp(popup) {
 }
 
 function openPicture(pictureName, pictureLink) {
-  document.querySelector('.popup__fidcaption').textContent = pictureName;
-  document.querySelector('.popup__image').src = pictureLink;
+  cardFidcaption.textContent = pictureName;
+  cardBigImage.src = pictureLink;
+  cardBigImage.alt = pictureName;
 }
 
-function makePicturePopup() {
-  const pictures = document.querySelectorAll('.card__image');
-  pictures.forEach(function (item) {
-    item.addEventListener('click', () => showPopUp(popupPicture));
-    item.addEventListener('click', (evt) => openPicture(evt.target.nextElementSibling.firstElementChild.textContent, evt.target.src))
-  })
-}
-
-function addCard(placeNameValue, placeLinkValue) {
+function createCard(placeNameValue, placeLinkValue) {
   const cardTemplate = document.querySelector('#card-template').content;
   const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
+  const cardImage = cardElement.querySelector('.card__image');
   cardElement.querySelector('.card__title').textContent = placeNameValue;
-  cardElement.querySelector('.card__image').src = placeLinkValue;
-  cardElement.querySelector('.card__image').alt = placeNameValue;
+  cardImage.src = placeLinkValue;
+  cardImage.alt = placeNameValue;
+
   cardElement.querySelector('.card__like').addEventListener('click', function (evt) {
     evt.target.classList.toggle('card__like_active');
   })
+
+  cardElement.querySelector('.card__trash').addEventListener('click', () => {
+    cardElement.remove();
+  })
+
+  cardImage.addEventListener('click', function(evt) {
+    showPopUp(popupPicture);
+    openPicture(evt.target.nextElementSibling.firstElementChild.textContent, evt.target.src);
+  })
+
+return cardElement
+}
+
+function addCard(placeNameValue, placeLinkValue) {
+  const cardElement = createCard(placeNameValue, placeLinkValue)
   cardContainer.prepend(cardElement);
-  deleteCard();
-  makePicturePopup();
 }
 
 function showCards() {
@@ -94,39 +93,40 @@ function showCards() {
 
 showCards();
 
-edit.addEventListener('click', () => showPopUp(popupEdit));
-nameInput.value = profileName.textContent;
-jobInput.value = profileJob.textContent;
+editPopupBtn.addEventListener('click', () => {
+  showPopUp(popupEdit);
+  nameInput.value = profileName.textContent;
+  jobInput.value = profileJob.textContent;
+});
 
-add.addEventListener('click', () => showPopUp(popupAdd));
+addPopupBtn.addEventListener('click', () => showPopUp(popupAdd));
 
-function closePopup(button, popup) {
+// находим все крестики проекта по универсальному селектору
+const closeButtons = document.querySelectorAll('.popup__close');
+
+closeButtons.forEach((button) => {
+  // находим 1 раз ближайший к крестику попап
+  const popup = button.closest('.popup');
+  // устанавливаем обработчик закрытия на крестик
   button.addEventListener('click', () => hidePopUp(popup));
-}
+});
 
-closePopup(closeEditBtn, popupEdit);
-closePopup(closeAddBtn, popupAdd);
-closePopup(closePictureBtn, popupPicture);
-
-function formMakeHandler(evt) {
+function handleNewCardSubmit(evt) {
   evt.preventDefault();
-  const placeName = document.querySelector('.popup__input_type_place-name');
-  const placeLink = document.querySelector('.popup__input_type_link');
   addCard(placeName.value, placeLink.value);
-  placeName.value = "";
-  placeLink.value = "";
+  evt.target.reset()
   hidePopUp(popupAdd);
 }
 
-addFormElement.addEventListener('submit', formMakeHandler);
+cardForm.addEventListener('submit', handleNewCardSubmit);
 
-function formSubmitHandler(evt) {
+function handleProfileFormSubmit(evt) {
   evt.preventDefault();
-  let newNameValue = nameInput.value;
-  let newJobValue = jobInput.value;
+  const newNameValue = nameInput.value;
+  const newJobValue = jobInput.value;
   profileName.textContent = newNameValue;
   profileJob.textContent = newJobValue;
   hidePopUp(popupEdit);
 }
 
-formElement.addEventListener('submit', formSubmitHandler);
+profileForm.addEventListener('submit', handleProfileFormSubmit);
