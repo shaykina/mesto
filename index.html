@@ -27,54 +27,23 @@
         <button class="button profile__add-button" type="button" aria-label="кнопка добавления"></button>
       </section>
       <section class="elements" aria-label="карточки">
-        <article class="card">
-          <img class="card__image" src="images/italy-first.jpg" alt="постройки в горах">
-          <div class="card__caption">
-            <h2 class="card__title">Карачаевск</h2>
-            <button class="button card__like" type="button" aria-label="кнопка лайк"></button>
-          </div>
-        </article>
-        <article class="card">
-          <img class="card__image" src="images/italy-second.jpg" alt="Эльбрус на рассвете">
-          <div class="card__caption">
-            <h2 class="card__title">Гора Эльбрус</h2>
-            <button class="button card__like" type="button" aria-label="кнопка лайк"></button>
-          </div>
-        </article>
-        <article class="card">
-          <img class="card__image" src="images/italy-third.jpg" alt="лес и горы">
-          <div class="card__caption">
-            <h2 class="card__title">Домбай</h2>
-            <button class="button card__like" type="button" aria-label="кнопка лайк"></button>
-          </div>
-        </article>
-        <article class="card">
-          <img class="card__image" src="images/italy-fourth.jpg" alt="Эльбрус на рассвете">
-          <div class="card__caption">
-            <h2 class="card__title">Гора Эльбрус</h2>
-            <button class="button card__like" type="button" aria-label="кнопка лайк"></button>
-          </div>
-        </article>
-        <article class="card">
-          <img class="card__image" src="images/italy-fifth.jpg" alt="лес и горы">
-          <div class="card__caption">
-            <h2 class="card__title">Домбай</h2>
-            <button class="button card__like" type="button" aria-label="кнопка лайк"></button>
-          </div>
-        </article>
-        <article class="card">
-          <img class="card__image" src="images/italy-sixth.jpg" alt="постройки в горах">
-          <div class="card__caption">
-            <h2 class="card__title">Карачаево-Черкессия</h2>
-            <button class="button card__like" type="button" aria-label="кнопка лайк"></button>
-          </div>
-        </article>
+
+        <template id="card-template">
+          <article class="card">
+            <img class="card__image" alt="что-то красивое">
+            <div class="card__caption">
+              <h2 class="card__title">Карачаевск</h2>
+              <button class="button card__like" type="button" aria-label="кнопка лайк"></button>
+              <button class="button card__trash" type="button" aria-label="кнопка удаления"></button>
+            </div>
+          </article>
+        </template>
       </section>
     </main>
     <footer class="footer">
       <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
     </footer>
-    <div class="popup">
+    <div class="popup popup_edit">
       <div class="popup__container">
         <button class="button popup__close" type="button" aria-label="кнопка закрытия попапа"></button>
         <h2 class="popup__heading">Редактировать профиль</h2>
@@ -86,6 +55,27 @@
           <button class="popup__submit" type="submit">Сохранить</button>
         </form>
       </div>
+    </div>
+    <div class="popup popup_add">
+      <div class="popup__container">
+        <button class="button popup__close" type="button" aria-label="кнопка закрытия попапа"></button>
+        <h2 class="popup__heading">Новое место</h2>
+        <form class="popup__add-form" name="add-form">
+          <fieldset class="popup__form">
+            <input class="popup__input popup__input_type_place-name" type="text" name="place-name"
+              placeholder="Название">
+            <input class="popup__input popup__input_type_link" type="text" name="link" placeholder="Ссылка на картинку">
+          </fieldset>
+          <button class="popup__submit popup__submit_make" type="submit">Создать</button>
+        </form>
+      </div>
+    </div>
+    <div class="popup popup_picture">
+      <figure class="popup__figure">
+        <button class="button popup__close" type="button" aria-label="кнопка закрытия попапа"></button>
+        <img class="popup__image" src="images/Avatar.jpg" alt="крупное фото места">
+        <figcaption class="popup__fidcaption">Италия</figcaption>
+      </figure>
     </div>
   </div>
   <script src="scripts/index.js"></script>
