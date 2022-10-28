@@ -14,6 +14,8 @@ const cardFidcaption = document.querySelector('.popup__fidcaption');
 const cardBigImage = document.querySelector('.popup__image');
 const placeName = document.querySelector('.popup__input_type_place-name');
 const placeLink = document.querySelector('.popup__input_type_link');
+const cardTemplate = document.querySelector('#card-template').content;
+const popups = document.querySelectorAll('.popup');
 
 const initialCards = [
   {
@@ -65,7 +67,6 @@ function openPicture(pictureName, pictureLink) {
 }
 
 function createCard(placeNameValue, placeLinkValue) {
-  const cardTemplate = document.querySelector('#card-template').content;
   const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
   const cardImage = cardElement.querySelector('.card__image');
   cardElement.querySelector('.card__title').textContent = placeNameValue;
@@ -105,29 +106,31 @@ editPopupBtn.addEventListener('click', () => {
   showPopUp(popupEdit);
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
+  const inputList = Array.from(popupEdit.querySelectorAll('.popup__input'));
+  const submitButtonSelector = popupEdit.querySelector('.popup__submit');
+  toggleButtonState(inputList, submitButtonSelector, validationObject);
+  popupEdit.querySelectorAll('.popup__input').forEach( (input) => {
+    checkInputValidity(popupEdit, input, validationObject);
+  });
 });
 
-addPopupBtn.addEventListener('click', () => showPopUp(popupAdd));
-
-// находим все крестики проекта по универсальному селектору
-const closeButtons = document.querySelectorAll('.popup__close');
-
-closeButtons.forEach((button) => {
-  // находим 1 раз ближайший к крестику попап
-  const popup = button.closest('.popup');
-  // устанавливаем обработчик закрытия на крестик
-  button.addEventListener('click', () => hidePopUp(popup));
+addPopupBtn.addEventListener('click', () => {
+  showPopUp(popupAdd);
+  const inputList = Array.from(popupAdd.querySelectorAll('.popup__input'));
+  const submitButtonSelector = popupAdd.querySelector('.popup__submit');
+  toggleButtonState(inputList, submitButtonSelector, validationObject);
 });
 
-document.addEventListener('click', (evt) => {
-  const popup = evt.target.closest('.popup');
-  const popupContainer = popup.querySelector('.popup__container');
-  const popupPictureContainer = popup.querySelector('.popup__figure');
-  // для попапов редактирования и удаления существует popupContainer и клик должен быть не по нему, для увеличенной картинки - аналогично с popupPictureContainer
-  if ((popupContainer && !popupContainer.contains(evt.target)) || (popupPictureContainer && !popupPictureContainer.contains(evt.target))) {
-    hidePopUp(popup);
-  }
-});
+popups.forEach((popup) => {
+  popup.addEventListener('mousedown', (evt) => {
+      if (evt.target.classList.contains('popup_opened')) {
+        hidePopUp(popup);
+      }
+      if (evt.target.classList.contains('popup__close')) {
+        hidePopUp(popup);
+      }
+  })
+})
 
 function handleNewCardSubmit(evt) {
   evt.preventDefault();
