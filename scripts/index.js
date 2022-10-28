@@ -42,12 +42,20 @@ const initialCards = [
   }
 ];
 
+function handleEscapeClick(evt) {
+  if (evt.key === 'Escape') {
+    hidePopUp(document.querySelector('.popup_opened'));
+  }
+}
+
 function showPopUp(popup) {
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown', handleEscapeClick);
 }
 
 function hidePopUp(popup) {
   popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', handleEscapeClick);
 }
 
 function openPicture(pictureName, pictureLink) {
@@ -72,12 +80,12 @@ function createCard(placeNameValue, placeLinkValue) {
     cardElement.remove();
   })
 
-  cardImage.addEventListener('click', function(evt) {
+  cardImage.addEventListener('click', function (evt) {
     showPopUp(popupPicture);
     openPicture(evt.target.nextElementSibling.firstElementChild.textContent, evt.target.src);
   })
 
-return cardElement
+  return cardElement
 }
 
 function addCard(placeNameValue, placeLinkValue) {
@@ -109,6 +117,16 @@ closeButtons.forEach((button) => {
   const popup = button.closest('.popup');
   // устанавливаем обработчик закрытия на крестик
   button.addEventListener('click', () => hidePopUp(popup));
+});
+
+document.addEventListener('click', (evt) => {
+  const popup = evt.target.closest('.popup');
+  const popupContainer = popup.querySelector('.popup__container');
+  const popupPictureContainer = popup.querySelector('.popup__figure');
+  // для попапов редактирования и удаления существует popupContainer и клик должен быть не по нему, для увеличенной картинки - аналогично с popupPictureContainer
+  if ((popupContainer && !popupContainer.contains(evt.target)) || (popupPictureContainer && !popupPictureContainer.contains(evt.target))) {
+    hidePopUp(popup);
+  }
 });
 
 function handleNewCardSubmit(evt) {
