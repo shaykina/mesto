@@ -1,3 +1,5 @@
+import {cardFidcaption, cardBigImage, popupPicture} from './index.js';
+
 export default class Card {
   constructor(data, templateSelector) {
     this._templateSelector = templateSelector;
@@ -11,8 +13,6 @@ export default class Card {
   }
 
   _createPicture() {
-    const cardFidcaption = document.querySelector('.popup__fidcaption');
-    const cardBigImage = document.querySelector('.popup__image');
     cardFidcaption.textContent = this._title;
     cardBigImage.src = this._image;
     cardBigImage.alt = this._title;
@@ -25,16 +25,16 @@ export default class Card {
   _setEventListeners(cardImage, showPopUp) {
     this._element.querySelector('.card__trash').addEventListener('click', () => {
       this._element.remove();
+      this._element = null;
     });
 
     this._element.querySelector('.card__like').addEventListener('click', () => {
       this._handleLikeClick();
     });
 
-    const popupPicture = document.querySelector('.popup_picture');
     cardImage.addEventListener('click', () => {
-      showPopUp(popupPicture);
       this._createPicture();
+      showPopUp(popupPicture);
     });
   }
 

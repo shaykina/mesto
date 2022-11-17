@@ -15,6 +15,11 @@ const cardContainer = document.querySelector('.elements');
 const placeName = document.querySelector('.popup__input_type_place-name');
 const placeLink = document.querySelector('.popup__input_type_link');
 const popups = document.querySelectorAll('.popup');
+const cardFidcaption = document.querySelector('.popup__fidcaption');
+const cardBigImage = document.querySelector('.popup__image');
+const popupPicture = document.querySelector('.popup_picture');
+
+export {cardFidcaption, cardBigImage, popupPicture};
 
 const initialCards = [
   {
@@ -52,6 +57,12 @@ const validationObject = {
   errorClass: 'popup__error_visible'
 }
 
+const editFormValidator = new FormValidator(validationObject, '.popup__edit-form');
+const addFormValidator = new FormValidator(validationObject, '.popup__add-form');
+
+editFormValidator.enableValidation();
+addFormValidator.enableValidation();
+
 function handleEscapeClick(evt) {
   if (evt.key === 'Escape') {
     hidePopUp(document.querySelector('.popup_opened'));
@@ -84,21 +95,13 @@ editPopupBtn.addEventListener('click', () => {
   showPopUp(popupEdit);
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
-  const inputList = Array.from(popupEdit.querySelectorAll('.popup__input'));
-  const submitButtonSelector = popupEdit.querySelector('.popup__submit');
-  const editFormValidator = new FormValidator(validationObject, '.popup__edit-form');
-  editFormValidator.toggleButtonState(inputList, submitButtonSelector);
-  popupEdit.querySelectorAll('.popup__input').forEach((input) => {
-    editFormValidator.checkInputValidity(input);
-  });
+  editFormValidator.clearErrors();
+  editFormValidator.toggleButtonState();
 });
 
 addPopupBtn.addEventListener('click', () => {
   showPopUp(popupAdd);
-  const inputList = Array.from(popupAdd.querySelectorAll('.popup__input'));
-  const submitButtonSelector = popupAdd.querySelector('.popup__submit');
-  const addFormValidator = new FormValidator(validationObject, '.popup__add-form');
-  addFormValidator.toggleButtonState(inputList, submitButtonSelector);
+  addFormValidator.toggleButtonState();
 });
 
 popups.forEach((popup) => {
@@ -134,11 +137,5 @@ function handleProfileFormSubmit(evt) {
 }
 
 profileForm.addEventListener('submit', handleProfileFormSubmit);
-
-const formList = ['.popup__edit-form', '.popup__add-form'];
-formList.forEach((formSelector) => {
-  const validator = new FormValidator(validationObject, formSelector);
-  validator.enableValidation();
-});
 
 

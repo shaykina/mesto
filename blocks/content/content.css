@@ -2,6 +2,7 @@
   padding: 0 200px;
   flex: 1;
   min-width: 68%;
+  min-height: 100vh;
 }
 
 @media screen and (max-width: 1279px) {
