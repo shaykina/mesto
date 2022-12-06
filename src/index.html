@@ -5,18 +5,17 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="pages/index.css">
   <title>Место</title>
 </head>
 
 <body class="page">
   <div class="page__wrapper">
     <header class="header">
-      <img class="header__logo" src="images/logo.svg" alt="Место Россия">
+      <img class="header__logo" src="<%=require('./images/logo.svg')%>" alt="Место Россия">
     </header>
     <main class="content">
       <section class="profile">
-        <img class="profile__avatar" src="images/Avatar.jpg" alt="фото Кусто">
+        <img class="profile__avatar" src="<%=require('./images/Avatar.jpg')%>" alt="фото Кусто">
         <div class="profile__main">
           <div class="profile__info">
             <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -88,12 +87,11 @@
     <div class="popup popup_picture">
       <figure class="popup__figure">
         <button class="button popup__close" type="button" aria-label="кнопка закрытия попапа"></button>
-        <img class="popup__image" src="images/Avatar.jpg" alt="крупное фото места">
+        <img class="popup__image" src="" alt="крупное фото места">
         <figcaption class="popup__fidcaption"></figcaption>
       </figure>
     </div>
   </div>
-  <script type ="module" src="scripts/index.js"></script>
 </body>
 
 </html>

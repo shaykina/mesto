@@ -1,10 +1,9 @@
-import {cardFidcaption, cardBigImage, popupPicture} from './index.js';
-
 export default class Card {
-  constructor(data, templateSelector) {
+  constructor( {data, templateSelector, handleCardClick} ) {
     this._templateSelector = templateSelector;
     this._image = data.link;
     this._title = data.name;
+    this._handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
@@ -12,17 +11,11 @@ export default class Card {
     return cardElement;
   }
 
-  _createPicture() {
-    cardFidcaption.textContent = this._title;
-    cardBigImage.src = this._image;
-    cardBigImage.alt = this._title;
-  }
-
   _handleLikeClick() {
     this._element.querySelector('.card__like').classList.toggle('card__like_active');
   }
 
-  _setEventListeners(cardImage, showPopUp) {
+  _setEventListeners(cardImage, cardTitle) {
     this._element.querySelector('.card__trash').addEventListener('click', () => {
       this._element.remove();
       this._element = null;
@@ -33,23 +26,21 @@ export default class Card {
     });
 
     cardImage.addEventListener('click', () => {
-      this._createPicture();
-      showPopUp(popupPicture);
+      this._handleCardClick(cardImage, cardTitle);
     });
   }
 
-
-  createCard(showPopUp) {
+  createCard() {
     this._element = this._getTemplate();
 
     const cardImage = this._element.querySelector('.card__image');
-    this._element.querySelector('.card__title').textContent = this._title;
+    const cardTitle = this._element.querySelector('.card__title');
+    cardTitle.textContent = this._title;
     cardImage.src = this._image;
     cardImage.alt = this._title;
 
-    this._setEventListeners(cardImage, showPopUp);
+    this._setEventListeners(cardImage, cardTitle);
 
     return this._element;
   }
-
 }
