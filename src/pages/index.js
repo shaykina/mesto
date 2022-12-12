@@ -21,38 +21,22 @@ const userInfo = new UserInfo({
 
 const editPopup = new PopupWithForm({
   popupSelector: '.popup_edit',
-  handleFormSubmit: () => {
-    userInfo.setUserInfo(nameInput, jobInput);
+  handleFormSubmit: (formValues) => {
+    userInfo.setUserInfo(formValues);
   }
 });
 
-const newCard = new Section({
-  items: [{
-    name: placeName.value,
-    link: placeLink.value
-  }],
-  renderer: () => {
-    const card = new Card({
-      data: {
-        name: placeName.value,
-        link: placeLink.value
-      },
-      templateSelector: '#card-template',
-      handleCardClick: (cardImage, cardTitle) => {
-        picturePopup.open(cardImage, cardTitle);
-      }
-    });
-    const cardElement = card.createCard();
-    cardList.addItem(cardElement);
-  }
-}, '.elements');
-
-const addPopup = new PopupWithForm({
-  popupSelector: '.popup_add',
-  handleFormSubmit: () => {
-    newCard.rendererItems();
+function createCard(item) {
+  const card = new Card({
+  data: item,
+  templateSelector: '#card-template',
+  handleCardClick: (cardImage, cardTitle) => {
+    picturePopup.open(cardImage, cardTitle);
   }
 });
+const cardElement = card.createCard();
+return cardElement
+}
 
 const picturePopup = new PopupWithImage('.popup_picture');
 
@@ -73,10 +57,19 @@ const cardList = new Section({
 
 cardList.rendererItems();
 
+const addPopup = new PopupWithForm({
+  popupSelector: '.popup_add',
+  handleFormSubmit: (formValues) => {
+    const newCardElement = createCard(formValues);
+    cardList.addItem(newCardElement);
+  }
+});
+
 editPopupBtn.addEventListener('click', () => {
   editPopup.open();
-  nameInput.value = userInfo.getUserInfo().name;
-  jobInput.value = userInfo.getUserInfo().job;
+  const info = userInfo.getUserInfo();
+  nameInput.value = info.name;
+  jobInput.value = info.job;
   editFormValidator.clearErrors();
   editFormValidator.toggleButtonState();
 });
