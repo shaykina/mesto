@@ -3,6 +3,8 @@ export default class Popup {
     this._popupSelector = popupSelector;
     this._popup = document.querySelector(this._popupSelector);
     this._handleEscClose = this._handleEscClose.bind(this);
+    this._cardFidcaption = document.querySelector('.popup__fidcaption');
+    this._cardBigImage = document.querySelector('.popup__image');
   }
 
   open() {

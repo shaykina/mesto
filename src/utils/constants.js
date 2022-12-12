@@ -5,8 +5,6 @@ export const nameInput = profileForm.querySelector('.popup__input_type_name');
 export const jobInput = profileForm.querySelector('.popup__input_type_job');
 export const placeName = document.querySelector('.popup__input_type_place-name');
 export const placeLink = document.querySelector('.popup__input_type_link');
-export const profileName = document.querySelector('.profile__name');
-export const profileJob = document.querySelector('.profile__job');
 
 export const initialCards = [
   {

@@ -43,14 +43,7 @@ const picturePopup = new PopupWithImage('.popup_picture');
 const cardList = new Section({
   items: initialCards,
   renderer: (item) => {
-    const card = new Card({
-      data: item,
-      templateSelector: '#card-template',
-      handleCardClick: (cardImage, cardTitle) => {
-        picturePopup.open(cardImage, cardTitle);
-      }
-    });
-    const cardElement = card.createCard();
+    const cardElement = createCard(item);
     cardList.addItem(cardElement);
   }
 }, '.elements');
