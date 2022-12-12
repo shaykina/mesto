@@ -12,16 +12,19 @@ export default class Card {
   }
 
   _handleLikeClick() {
-    this._element.querySelector('.card__like').classList.toggle('card__like_active');
+    this._likeButton.classList.toggle('card__like_active');
   }
 
   _setEventListeners(cardImage, cardTitle) {
-    this._element.querySelector('.card__trash').addEventListener('click', () => {
+    this._likeButton = this._element.querySelector('.card__like');
+    this._trashButton = this._element.querySelector('.card__trash');
+
+    this._trashButton.addEventListener('click', () => {
       this._element.remove();
       this._element = null;
     });
 
-    this._element.querySelector('.card__like').addEventListener('click', () => {
+    this._likeButton.addEventListener('click', () => {
       this._handleLikeClick();
     });
 
