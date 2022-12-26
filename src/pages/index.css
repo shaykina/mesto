@@ -42,3 +42,7 @@
 @import url(../blocks/popup/__error/popup__error.css);
 @import url(../blocks/popup/__error/_visible/popup__error_visible.css);
 @import url(../blocks/popup/__field/popup__field.css);
+@import url(../blocks/card/__like-area/card__like-area.css);
+@import url(../blocks/card/__like-number/card__like-number.css);
+@import url(../blocks/card/__trash/_disabled/card__trash_disabled.css);
+@import url(../blocks/popup/__heading/_delete/popup__heading_delete.css);

@@ -15,7 +15,7 @@
     </header>
     <main class="content">
       <section class="profile">
-        <img class="profile__avatar" src="<%=require('./images/Avatar.jpg')%>" alt="фото Кусто">
+        <button class="profile__avatar" type="button" aria-label="редактировать аватар"></button>
         <div class="profile__main">
           <div class="profile__info">
             <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -32,8 +32,11 @@
             <img class="card__image" alt="что-то красивое">
             <div class="card__caption">
               <h2 class="card__title">Карачаевск</h2>
-              <button class="button card__like" type="button" aria-label="кнопка лайк"></button>
               <button class="button card__trash" type="button" aria-label="кнопка удаления"></button>
+              <div class="card__like-area">
+                <button class="button card__like" type="button" aria-label="кнопка лайк"></button>
+                <p class="card__like-number">1</p>
+              </div>
             </div>
           </article>
         </template>
@@ -90,6 +93,29 @@
         <img class="popup__image" src="<%=require('./images/Avatar.jpg')%>" alt="крупное фото места">
         <figcaption class="popup__fidcaption"></figcaption>
       </figure>
+    </div>
+    <div class="popup popup_delete">
+      <div class="popup__container">
+        <button class="button popup__close" type="button" aria-label="кнопка закрытия попапа"></button>
+        <h2 class="popup__heading popup__heading_delete">Вы уверены?</h2>
+        <button class="popup__submit" type="button">Да</button>
+      </div>
+    </div>
+    <div class="popup popup_photo">
+      <div class="popup__container">
+        <button class="button popup__close" type="button" aria-label="кнопка закрытия попапа"></button>
+        <h2 class="popup__heading">Обновить аватар</h2>
+        <form class="popup__form popup__photo-form" name="photo-form" novalidate>
+          <fieldset class="popup__fieldset">
+            <label class="popup__field">
+              <input class="popup__input popup__input_type_link" type="url" name="photolink" id="photolink"
+                placeholder="Ссылка на аватар" required>
+              <span class="popup__error link-error"></span>
+            </label>
+          </fieldset>
+          <button class="popup__submit" type="submit">Сохранить</button>
+        </form>
+      </div>
     </div>
   </div>
 </body>
