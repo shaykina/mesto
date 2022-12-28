@@ -32,8 +32,4 @@ export default class Popup {
     })
   }
 
-  renderLoading() {
-    this._button = this._popup.querySelector('.popup__submit');
-    this._button.textContent = 'Сохранение...';
-  }
 }

@@ -4,7 +4,7 @@ export default class Card {
     this._image = data.link;
     this._title = data.name;
     this.id = data._id;
-    this._likes = data.likes;
+    this.likes = data.likes;
     this._handleCardClick = handleCardClick;
     this._remove = remove;
     this._like = like;
@@ -15,7 +15,7 @@ export default class Card {
     this._cardLikes = this._element.querySelector('.card__like-number');
     this._likeButton = this._element.querySelector('.card__like');
     this._trashButton = this._element.querySelector('.card__trash');
-    this._newLikes = this._likes;
+    this._newLikes = this.likes;
   }
 
   _getTemplate() {
@@ -83,7 +83,7 @@ export default class Card {
   }
 
   _getLikesNumber() {
-    return this._likes.length;
+    return this.likes.length;
   }
 
   _putLikesNumber(likesNumber) {

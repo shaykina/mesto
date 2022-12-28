@@ -12,9 +12,11 @@ import PopupWithConfirmation from '../components/PopupWithConfirmation';
 
 const editFormValidator = new FormValidator(validationObject, '.popup__edit-form');
 const addFormValidator = new FormValidator(validationObject, '.popup__add-form');
+const avatarFormValitor = new FormValidator(validationObject, '.popup__photo-form');
 
 editFormValidator.enableValidation();
 addFormValidator.enableValidation();
+avatarFormValitor.enableValidation();
 
 const userInfo = new UserInfo({
   nameSelector: '.profile__name',
@@ -25,12 +27,9 @@ const userInfo = new UserInfo({
 const editPopup = new PopupWithForm({
   popupSelector: '.popup_edit',
   handleFormSubmit: (formValues) => {
-    editPopup.renderLoading();
-    api.saveNewUserInfo(formValues).then(() => {
+    editPopup.renderLoading(true);
+    return api.saveNewUserInfo(formValues).then(() => {
       userInfo.setUserInfo(formValues);
-    })
-    .catch((err) => {
-      console.log(err);
     })
   }
 });
@@ -38,14 +37,11 @@ const editPopup = new PopupWithForm({
 const avatarEditPopup = new PopupWithForm({
   popupSelector: '.popup_photo',
   handleFormSubmit: (formValues) => {
-    avatarEditPopup.renderLoading();
-    api.uploadAvatar(formValues.photolink).then((res) => {
+    avatarEditPopup.renderLoading(true);
+    return api.uploadAvatar(formValues.photolink).then((res) => {
       userInfo.setAvatar({
         avatar: res.avatar
       })
-    })
-    .catch((err) => {
-      console.log(err);
     })
   }
 })
@@ -57,6 +53,7 @@ const avatarEditBtn = document.querySelector(userInfo._avatarSelector);
 
 avatarEditBtn.addEventListener('click', () => {
   avatarEditPopup.open();
+  avatarFormValitor.toggleButtonState();
 })
 
 editPopupBtn.addEventListener('click', () => {
@@ -105,14 +102,11 @@ api.getUserInfo().then((user) => {
     const addPopup = new PopupWithForm({
       popupSelector: '.popup_add',
       handleFormSubmit: (formValues) => {
-        addPopup.renderLoading();
-        api.addNewCard(formValues).then((data) => {
+        addPopup.renderLoading(true);
+        return api.addNewCard(formValues).then((data) => {
           const newCardElement = createCard(data);
           cardList.addItem(newCardElement);
         })
-          .catch((err) => {
-            console.log(err);
-          });
       }
     });
 
@@ -137,7 +131,7 @@ api.getUserInfo().then((user) => {
         remove: () => {
           deletePopup.open({
             thisCard: card,
-            handleDelete: () => {return api.deleteCard(card.id)}
+            handleDelete: () => { return api.deleteCard(card.id) }
           });
         },
         like: (card) => {
@@ -148,7 +142,7 @@ api.getUserInfo().then((user) => {
         }
       });
 
-      const isMyLike = card._likes.some(isMe);
+      const isMyLike = card.likes.some(isMe);
       if (isMyLike) {
         card.fillMyLike();
       }
